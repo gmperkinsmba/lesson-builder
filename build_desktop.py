@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build a local macOS Research to Lessons application bundle."""
+"""Build a local macOS Lesson Builder application bundle."""
 from __future__ import annotations
 
 import plistlib
@@ -13,7 +13,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parent
-APP_NAME = "Research to Lessons"
+APP_NAME = "Lesson Builder"
 ASSET_MANIFEST = ROOT / "desktop-assets.txt"
 OWNER_MARKER = ROOT / "desktop-app-owner.txt"
 BUNDLE_ID = "io.github.gmperkinsmba.research-to-lessons"
@@ -60,7 +60,7 @@ def main() -> int:
         destination.parent.mkdir(exist_ok=True)
         if destination.exists():
             if not owned_bundle(destination):
-                raise SystemExit(f"Refusing to replace an app without the Research to Lessons ownership marker: {destination}")
+                raise SystemExit(f"Refusing to replace an app without the Lesson Builder ownership marker: {destination}")
             backup_owned_bundle(destination)
         shutil.move(str(build_root / "dist" / f"{APP_NAME}.app"), str(destination))
     print(ROOT / "dist" / f"{APP_NAME}.app")
@@ -104,7 +104,7 @@ def write_notices(destination: Path) -> None:
     if python_license is None:
         raise SystemExit("The Python runtime license text is missing or unreadable.")
     chunks = [
-        "Research to Lessons desktop dependencies\n\nThird-party license texts for the pinned build environment follow.\n",
+        "Lesson Builder desktop dependencies\n\nThird-party license texts for the pinned build environment follow.\n",
         f"\n{'=' * 72}\nPython runtime {python_version}\n{'=' * 72}\n{python_license}\n",
     ]
     for distribution in sorted(importlib.metadata.distributions(), key=lambda item: (item.metadata.get("Name") or "").lower()):

@@ -592,5 +592,5 @@ def make_server(host=HOST, port=PORT):
 
 if __name__ == "__main__":
     server = make_server()
-    print(f"Research to Lessons listening at http://{HOST}:{server.server_port}", flush=True)
+    print(f"Lesson Builder listening at http://{HOST}:{server.server_port}", flush=True)
     server.serve_forever()
