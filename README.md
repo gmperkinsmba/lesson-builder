@@ -1,4 +1,4 @@
-# Research to Lessons
+# Lesson Builder
 
 **Mac app install**
 
@@ -11,7 +11,9 @@ python3.12 -m venv .desktop-venv
 .desktop-venv/bin/python install_desktop.py
 ```
 
-Open `~/Applications/Research to Lessons.app` in Finder. Close its window or press Command-Q to quit. The app includes Python and uses an ad-hoc signature; it has no Developer ID signature or notarization. Lesson data stays in `~/.research-to-lessons/lessons.sqlite3`. To remove the app, move it from Applications to Trash. The runtime data stays until you remove that folder yourself.
+Build creates `dist/Lesson Builder.app`.
+
+Open `~/Applications/Lesson Builder.app` in Finder. Close its window or press Command-Q to quit. The app includes Python. It has an ad-hoc signature. It has no Developer ID signature or notarization. Lesson data stays in `~/.research-to-lessons/lessons.sqlite3`. To remove the app, move it from Applications to Trash. The runtime data stays until you remove that folder yourself.
 
 For optional browser development, run `python3 server.py` and open `http://127.0.0.1:8325`. The desktop app starts and stops its own local server.
 
@@ -37,9 +39,9 @@ Write one factual sentence on each statement card. Link it to a source, or mark 
 
 Changing a source adds a new version and clears reviews on only the claims linked to it. Changing a statement clears its review. Changing the worked values clears reviews on inference claims. The revision list shows saved edits.
 
-The sample uses the Python `statistics` documentation. Its lesson text is an original paraphrase. It does not copy the source page. Read the [mean and median definitions](https://docs.python.org/3/library/statistics.html) and the [Python documentation license](https://docs.python.org/3/license.html).
+The sample uses the Python `statistics` documentation. Its lesson text is an original paraphrase. It does not copy the source page. Read the [mean and median definitions](https://docs.python.org/3/library/statistics.html). Read the [Python documentation license](https://docs.python.org/3/license.html).
 
-The checked exercise uses arithmetic to check the mean and median. It does not run learner input as code. Teacher exports include answers and source links. Learner exports leave out the answers. Both exports include source credit. Both mark the worked-example note as unchecked teacher text.
+Arithmetic checks the exercise mean and median. The app does not run learner input as code. Teacher exports include answers and source links. Learner exports leave out the answers. Both exports include source credit. Both mark the worked-example note as unchecked teacher text.
 
 ## Readability
 
@@ -47,7 +49,7 @@ The reading panel shows a grade estimate, reading ease, and word count. It is a 
 
 ## Settings and reset
 
-Settings save the teacher name, target grade, and learner instructions in the local database. Use **Reset to sample lesson** to restore the demo lesson. It also restores the sources, review notes, and settings.
+Settings save the teacher name and target grade. They also save learner instructions in the local database. Use **Reset to sample lesson** to restore the demo lesson. It also restores the sources, review notes, and settings.
 
 ## Test
 
@@ -55,7 +57,7 @@ Settings save the teacher name, target grade, and learner instructions in the lo
 python3 -m unittest discover -s tests -v
 ```
 
-Tests cover claim and source reviews, selective invalidation, revision history, and export gates. They also cover answer checking, escaping, local data permissions, and request guards. Tests use synthetic local data. No live source fetch is included.
+Tests cover claim reviews and source reviews. They check selective invalidation and revision history. They check export rules and answer checks. They check escaping, local data permissions, and request guards. Tests use synthetic local data. They do not fetch live sources.
 
 ## Limits
 

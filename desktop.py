@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Native macOS shell for Research to Lessons."""
+"""Native macOS shell for Lesson Builder."""
 from __future__ import annotations
 
 import threading
@@ -18,7 +18,7 @@ def run() -> None:
         started = True
         url = f"http://127.0.0.1:{server.server_port}/?desktop=1"
         install_policy(url)
-        webview.create_window("Research to Lessons", url, width=1080, height=760, min_size=(800, 580))
+        webview.create_window("Lesson Builder", url, width=1080, height=760, min_size=(800, 580))
         webview.start()
     finally:
         if started:
@@ -35,7 +35,7 @@ if __name__ == "__main__":
         import AppKit
 
         alert = AppKit.NSAlert.alloc().init()
-        alert.setMessageText_("Research to Lessons could not start")
+        alert.setMessageText_("Lesson Builder could not start")
         alert.setInformativeText_("The local app could not open. Quit and try again.")
         alert.addButtonWithTitle_("OK")
         alert.runModal()

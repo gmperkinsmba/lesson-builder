@@ -298,7 +298,7 @@ async function start() {
     await refresh();
     $("lesson-data").addEventListener("keydown", (event) => { if (event.key === "Enter") event.preventDefault(); });
   } catch (err) {
-    document.querySelector("main").innerHTML = `<section class="error-card"><h1>Research to Lessons</h1><p>Could not load the local lesson store. Check that the app is running.</p></section>`;
+    document.querySelector("main").innerHTML = `<section class="error-card"><h1>Lesson Builder</h1><p>Could not load the local lesson store. Check that the app is running.</p></section>`;
   }
 }
 start();

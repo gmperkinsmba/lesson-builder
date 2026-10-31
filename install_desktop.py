@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Install only an owned Research to Lessons bundle without deleting prior copies."""
+"""Install only an owned Lesson Builder bundle without deleting prior copies."""
 from __future__ import annotations
 
 import plistlib
