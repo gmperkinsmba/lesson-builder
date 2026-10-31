@@ -13,6 +13,7 @@ import threading
 from contextlib import contextmanager
 from datetime import datetime, timezone
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from socketserver import TCPServer
 from pathlib import Path
 from urllib.parse import urlparse
 
@@ -409,6 +410,10 @@ def save_claim(c, payload, allow_blank=False):
 class Handler(BaseHTTPRequestHandler):
     server_version = "ResearchLessons/1.0"
 
+    def setup(self):
+        super().setup()
+        self.connection.settimeout(10)
+
     def send(self, status, body, content_type="application/json; charset=utf-8", raw=False):
         data = body if raw else json.dumps(body, ensure_ascii=False).encode("utf-8")
         self.send_response(status)
@@ -420,10 +425,11 @@ class Handler(BaseHTTPRequestHandler):
         self.wfile.write(data)
 
     def origin_ok(self):
-        if self.headers.get("Host") not in (f"127.0.0.1:{PORT}", f"localhost:{PORT}"):
+        port = self.server.server_port
+        if self.headers.get("Host") not in (f"127.0.0.1:{port}", f"localhost:{port}"):
             return False
         origin = self.headers.get("Origin")
-        return origin is None or origin in (f"http://127.0.0.1:{PORT}", f"http://localhost:{PORT}")
+        return origin is None or origin in (f"http://127.0.0.1:{port}", f"http://localhost:{port}")
 
     def do_GET(self):
         if not self.origin_ok():
@@ -567,8 +573,24 @@ class Handler(BaseHTTPRequestHandler):
         return
 
 
-if __name__ == "__main__":
+class LocalHTTPServer(ThreadingHTTPServer):
+    daemon_threads = True
+    allow_reuse_address = True
+
+    def server_bind(self):
+        TCPServer.server_bind(self)
+        self.server_name = HOST
+        self.server_port = self.socket.getsockname()[1]
+
+
+def make_server(host=HOST, port=PORT):
+    if host != HOST:
+        raise ValueError("The local server must bind to loopback")
     init_db()
-    server = ThreadingHTTPServer((HOST, PORT), Handler)
-    print(f"Research to Lessons listening at http://{HOST}:{PORT}", flush=True)
+    return LocalHTTPServer((HOST, port), Handler)
+
+
+if __name__ == "__main__":
+    server = make_server()
+    print(f"Research to Lessons listening at http://{HOST}:{server.server_port}", flush=True)
     server.serve_forever()

@@ -1,5 +1,20 @@
 # Research to Lessons
 
+**Mac app install**
+
+Build on macOS with Python 3.12, then install the owned app:
+
+```sh
+python3.12 -m venv .desktop-venv
+.desktop-venv/bin/python -m pip install -r requirements-desktop.lock.txt
+.desktop-venv/bin/python build_desktop.py
+.desktop-venv/bin/python install_desktop.py
+```
+
+Open `~/Applications/Research to Lessons.app` in Finder. Close its window or press Command-Q to quit. The app includes Python and uses an ad-hoc signature; it has no Developer ID signature or notarization. Lesson data stays in `~/.research-to-lessons/lessons.sqlite3`. To remove the app, move it from Applications to Trash. The runtime data stays until you remove that folder yourself.
+
+For optional browser development, run `python3 server.py` and open `http://127.0.0.1:8325`. The desktop app starts and stops its own local server.
+
 **First principle:** Turn reviewed sources into a lesson others can teach and practice.
 
 Build a lesson around a question, a short source list, and clear statements. Check each statement against a source or mark it as an inference. Then export a teacher copy and a learner exercise.

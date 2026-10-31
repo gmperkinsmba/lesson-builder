@@ -1,3 +1,4 @@
+if (new URLSearchParams(location.search).has('desktop')) {document.documentElement.classList.add('desktop-ui');document.querySelectorAll('a[href="/"]').forEach(a=>a.href='/?desktop=1');}
 let token = "";
 let current = null;
 let previewMode = "instructor";

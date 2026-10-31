@@ -1,6 +1,7 @@
 __pycache__/
 *.py[cod]
 .venv/
+.desktop-venv/
 venv/
 .env
 .env.*
@@ -16,6 +17,8 @@ uploads/
 exports/
 build/
 dist/
+*.app/
+*.app.previous-*/
 node_modules/
 graphify-out/
 .runtime/
