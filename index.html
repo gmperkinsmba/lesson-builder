@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#111315">
+  <title>Research to Lessons</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<a class="skip" href="#workspace">Skip to lesson workspace</a>
+<header class="topbar">
+  <a class="wordmark" href="/" aria-label="Research to Lessons home"><span class="wordmark-glyph" aria-hidden="true">R</span><span>RESEARCH TO LESSONS<small>LOCAL LESSON DESK</small></span></a>
+  <div class="top-actions"><span class="local-mark">PRIVATE · LOCAL</span><button id="settings-open" class="quiet-button">Settings</button></div>
+</header>
+<main id="workspace">
+  <section class="hero">
+    <div><p class="eyebrow">TEACHING WORKSPACE <span>01</span></p><h1>Research to Lessons</h1><p class="subtitle">Turn a focused question and checked sources into a lesson and practice sheet.</p></div>
+    <div class="revision-stamp"><span class="live-dot"></span><div><b id="revision-label">Revision 1</b><small id="updated-label">Local draft</small></div></div>
+  </section>
+  <section class="toolbar" aria-label="Lesson actions">
+    <div class="toolbar-copy"><span class="tool-icon" aria-hidden="true">01</span><div><b>Build from checked notes</b><small>Every factual sentence needs a source or an inference label.</small></div></div>
+    <div class="toolbar-actions"><button id="save-lesson" class="button-primary">Save lesson edits</button><button id="instructor-export" class="button-secondary" disabled>Export instructor</button><button id="learner-export" class="button-secondary" disabled>Export learner</button></div>
+  </section>
+  <div class="desk-grid">
+    <aside class="source-rail" aria-label="Lesson sources">
+      <div class="section-heading"><div><p class="eyebrow">EVIDENCE</p><h2>Sources</h2></div><span id="source-count" class="count-pill">0</span></div>
+      <p class="rail-intro">Add the pages you read. This desk stores links and your review notes. It does not fetch or copy source text.</p>
+      <div id="source-list" class="source-list"></div>
+      <details class="add-source"><summary><span class="plus-mark">+</span> Add a source</summary><form id="source-form" class="source-form">
+        <label>Source title<input name="title" maxlength="180" required placeholder="Official guide or reference"></label>
+        <label>HTTPS link<input name="url" type="url" maxlength="1000" required placeholder="https://example.org/docs"></label>
+        <label>Section<input name="section" maxlength="160" placeholder="Page, section, or heading"></label>
+        <label>Notes from your review<textarea name="notes" maxlength="1000" rows="3" placeholder="What did you check?"></textarea></label>
+        <label>Attribution<input name="attribution" maxlength="200" required placeholder="Author or organization"></label>
+        <label>License information link<input name="license_url" type="url" maxlength="1000" required placeholder="https://example.org/license"></label>
+        <button class="button-secondary" type="submit">Save source</button>
+      </form></details>
+      <section class="history"><div class="section-heading"><div><p class="eyebrow">EDIT TRAIL</p><h2>Revisions</h2></div></div><ol id="revision-list" class="revision-list"></ol></section>
+    </aside>
+    <section class="lesson-column" aria-label="Lesson builder">
+      <div class="section-heading"><div><p class="eyebrow">LESSON DRAFT</p><h2>Shape the lesson</h2></div><span class="revision-chip" id="revision-chip">v1</span></div>
+      <form id="lesson-form" class="lesson-form">
+        <label>Lesson title<input id="lesson-title" maxlength="240" required></label>
+        <label>Learning question<input id="lesson-question" maxlength="1000" required></label>
+        <label>Who is this for?<input id="lesson-audience" maxlength="240" required></label>
+        <label>Learning goal<input id="lesson-goal" maxlength="1000" required></label>
+        <label>Teacher note for the worked example<textarea id="lesson-example" maxlength="1000" rows="2" required aria-describedby="teacher-note-help"></textarea></label>
+        <small id="teacher-note-help" class="field-help">This note is not source checked. Review it before teaching.</small>
+        <label>Example values, comma separated<input id="lesson-data" inputmode="decimal" maxlength="600" required aria-describedby="data-help"></label>
+        <small id="data-help" class="field-help">Use 1 to 50 numbers. The mean and median are checked with arithmetic.</small>
+        <label>Learner exercise prompt<input id="lesson-prompt" maxlength="1000" required></label>
+      </form>
+      <div class="claim-heading"><div><p class="eyebrow">FACT CHECKLIST</p><h2>Statements to teach</h2></div><button id="add-claim" class="text-button">+ Add a statement</button></div>
+      <p class="checklist-note">Write one factual sentence per card. A person checks the source and sentence. No keyword scan can prove a claim.</p>
+      <div id="claim-list" class="claim-list"></div>
+      <section class="readability-card"><div><p class="eyebrow">READING DIAGNOSTIC</p><h3>Estimate the reading load</h3><p>This score checks sentence length and word shape. It cannot show whether a learner understands.</p></div><div class="readability-stats"><div><small>GRADE ESTIMATE</small><b id="grade-score">—</b></div><div><small>READING EASE</small><b id="ease-score">—</b></div><div><small>WORDS</small><b id="word-count">0</b></div></div></section>
+    </section>
+    <aside class="preview-column" aria-label="Lesson and exercise preview">
+      <div class="section-heading"><div><p class="eyebrow">CLASSROOM VIEW</p><h2>Preview</h2></div><div class="view-switch" role="group" aria-label="Preview type"><button class="view-tab active" data-view="instructor" aria-pressed="true">Instructor</button><button class="view-tab" data-view="learner" aria-pressed="false">Learner</button></div></div>
+      <div id="preview-card" class="preview-card" aria-live="polite"></div>
+      <section class="exercise-check"><div class="exercise-title"><span class="exercise-mark" aria-hidden="true">∑</span><div><p class="eyebrow">CHECKED PRACTICE</p><h3>Try the numbers</h3></div></div><p id="exercise-question" class="exercise-copy"></p><div id="exercise-values" class="number-row"></div><div class="answer-fields"><label>Mean<input id="answer-mean" type="number" step="any"></label><label>Median<input id="answer-median" type="number" step="any"></label><button id="check-answer" class="button-primary">Check answers</button></div><p id="answer-feedback" class="feedback" role="status" aria-live="polite"></p></section>
+      <section class="export-note"><span class="export-icon" aria-hidden="true">↗</span><div><b id="export-state">Review needed</b><p id="export-copy">Review each source and claim to enable both exports.</p></div></section>
+    </aside>
+  </div>
+</main>
+<dialog id="settings-dialog"><form method="dialog" id="settings-form" class="settings-panel"><div class="settings-head"><div><p class="eyebrow">LOCAL PREFERENCES</p><h2>Settings</h2></div><button class="quiet-button" value="cancel">Close</button></div><p>These preferences stay in the local lesson database.</p><label>Instructor name<input id="setting-name" maxlength="100" required></label><label>Target reading grade<input id="setting-grade" type="number" min="1" max="16" required></label><label>Learner instruction<textarea id="setting-instruction" maxlength="500" rows="3" required></textarea></label><button id="save-settings" class="button-primary" type="button">Save preferences</button><div class="runtime-info"><b>Local storage</b><small>SQLite stays in your private runtime folder. No accounts or provider keys are used.</small></div><button id="reset-workspace" class="danger-button" type="button">Reset to sample lesson</button></form></dialog>
+<div id="toast" role="status" aria-live="polite"></div>
+<script src="/app.js" defer></script>
+</body>
+</html>
